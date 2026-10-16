@@ -8,6 +8,7 @@ src/server.js             -> servidor local
 src/config/supabase.js    -> cliente Supabase (anon key)
 src/routes/cadastro.js    -> POST /api/cadastro (bcrypt)
 src/routes/cartoes.js     -> POST /api/cartoes, GET /api/cartoes/:cliente_id (view mascarada)
+public/                   -> painel web para cadastro e consulta
 sql/schema.sql            -> tabelas, view, GRANTs e RLS
 ```
 
@@ -30,6 +31,8 @@ npm install
 cp .env.example .env   # preencha SUPABASE_URL e SUPABASE_ANON_KEY (Settings -> API)
 npm run dev
 ```
+
+Abra `http://localhost:3000` para acessar o painel. Nele, você pode cadastrar clientes, adicionar cartões e consultar os cartões mascarados pelo ID do cliente. O painel não lista clientes nem permite editar/excluir registros, respeitando as permissões restritas da chave anon configuradas no banco.
 
 ## 3. Testar
 ```bash

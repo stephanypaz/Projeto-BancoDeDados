@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f5f1">
+    <title>Painel da loja | Banco de dados</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main class="layout">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Painel da loja, início">
+          <span class="brand-mark" aria-hidden="true">L</span>
+          <span>loja<span class="brand-light">.db</span></span>
+        </a>
+        <span class="connection"><span class="status-dot"></span> Painel do banco</span>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">ÁREA DE GERENCIAMENTO</p>
+        <h1>Seus dados,<br><span>em um só lugar.</span></h1>
+        <p class="intro-copy">Cadastre clientes e cartões e consulte os cartões salvos com segurança.</p>
+      </section>
+
+      <section class="workspace" aria-label="Gerenciamento do banco">
+        <aside class="sidebar">
+          <p class="sidebar-label">OPERAÇÕES</p>
+          <a class="nav-item active" href="#clientes"><span class="nav-icon" aria-hidden="true">＋</span> Clientes</a>
+          <a class="nav-item" href="#cartoes"><span class="nav-icon card-icon" aria-hidden="true">▤</span> Cartões</a>
+          <div class="sidebar-note">
+            <span class="note-icon" aria-hidden="true">i</span>
+            <p>Por segurança, os números completos dos cartões nunca são exibidos.</p>
+          </div>
+        </aside>
+
+        <div class="content">
+          <section class="panel" id="clientes">
+            <div class="panel-heading">
+              <div>
+                <p class="step">01 <span>/ CLIENTES</span></p>
+                <h2>Cadastrar cliente</h2>
+                <p class="panel-copy">Os dados são salvos no banco. A senha é protegida antes de ser armazenada.</p>
+              </div>
+              <span class="heading-icon" aria-hidden="true">♙</span>
+            </div>
+
+            <form id="client-form" class="form-grid">
+              <label class="field field-wide">
+                <span>Nome completo</span>
+                <input name="nome" type="text" minlength="2" maxlength="100" placeholder="Ex.: Maria da Silva" autocomplete="name" required>
+              </label>
+              <label class="field">
+                <span>E-mail</span>
+                <input name="email" type="email" maxlength="255" placeholder="maria@email.com" autocomplete="email" required>
+              </label>
+              <label class="field">
+                <span>Senha</span>
+                <input name="senha" type="password" minlength="8" maxlength="72" placeholder="Mínimo de 8 caracteres" autocomplete="new-password" required>
+              </label>
+              <div class="form-actions field-wide">
+                <span class="form-hint">A senha será armazenada com hash bcrypt.</span>
+                <button class="button button-primary" type="submit">Cadastrar cliente <span aria-hidden="true">↗</span></button>
+              </div>
+            </form>
+            <div class="result-box" id="client-result" role="status" hidden></div>
+          </section>
+
+          <section class="panel" id="cartoes">
+            <div class="panel-heading">
+              <div>
+                <p class="step">02 <span>/ CARTÕES</span></p>
+                <h2>Cartões do cliente</h2>
+                <p class="panel-copy">Informe o ID do cliente para adicionar ou consultar cartões mascarados.</p>
+              </div>
+              <span class="heading-icon" aria-hidden="true">▤</span>
+            </div>
+
+            <form id="card-form" class="form-grid">
+              <label class="field field-wide">
+                <span>ID do cliente</span>
+                <input name="cliente_id" type="text" inputmode="text" placeholder="Cole aqui o UUID do cliente" autocomplete="off" required>
+              </label>
+              <label class="field field-wide">
+                <span>Número do cartão</span>
+                <input name="numero_cartao" type="text" inputmode="numeric" maxlength="23" placeholder="Somente números (13 a 19 dígitos)" autocomplete="off" required>
+                <span class="field-caption">O número completo não será mostrado após o cadastro.</span>
+              </label>
+              <div class="form-actions field-wide">
+                <button class="button button-secondary" id="lookup-button" type="button">Consultar cartões <span aria-hidden="true">⌕</span></button>
+                <button class="button button-primary" type="submit">Adicionar cartão <span aria-hidden="true">↗</span></button>
+              </div>
+            </form>
+            <div class="result-box" id="card-result" role="status" hidden></div>
+            <div class="cards-list" id="cards-list" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+      <footer>PAINEL DE DESENVOLVIMENTO <span>·</span> CONEXÃO SEGURA VIA API</footer>
+    </main>
+  </body>
+</html>
